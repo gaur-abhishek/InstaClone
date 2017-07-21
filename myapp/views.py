@@ -25,7 +25,7 @@ def signup_view(request):
         form = SignUpForm()
         five_hours_thirty_mins_from_now = datetime.now() + timedelta(hours=5.5)
         today = five_hours_thirty_mins_from_now
-        return render(request, 'index.html',{'today': today}, {'form' : form})
+        return render(request, 'index.html', {'today': today}, {'form': form})
 
 
 def login_view(request):
@@ -50,8 +50,9 @@ def login_view(request):
 
     elif request.method == 'GET':
         form = LoginForm()
-        response_data['form'] = form
-        return render(request, 'login.html', response_data)
+
+    response_data['form'] = form
+    return render(request, 'login.html', response_data)
 
 
 def feed_view(request):

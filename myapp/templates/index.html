@@ -3,45 +3,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Instagram Clone</title>
+
+<style>
+    body {
+          text-align: center;
+          background-size: cover;
+          background-position: center;
+          color: grey;
+          font-family: monospace;
+         }
+    input {
+           border: 1px solid #efefef;
+           margin-bottom: 10px;
+           border-color:grey;
+           font-size: 18px;
+          }
+    input[type=submit] {
+           width: 12.5em;
+           background-color:#5DBCD2;
+           color: #fff;
+          }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 25px;
+  text-align: center;
+  font-family: arial;
+}
+a {
+    text-decoration: none;
+    color: #5DBCD2;
+}
+label {
+    font-size: 14px;
+}
+
+</style>
+
 </head>
-<body>
-	<div class="main">
-            <h1> Instagram Clone</h1>
-            <h3>Sign Up</h3>
-            <h4>{{ today }}</h4>
-    </div>
 
-    <div>
-        <form method="post">
-            {% csrf_token %}
+    <body>
+        <div class="card">
+        <div class="container">
 
-            <div>
-                <label for="username">Username: </label>
-                <input id="username" type="text" name="username" value={{ username }}>
-            </div>
+        <div class="main">
+                <h1> Instagram Clone</h1>
+                <h4>{{ today }}</h4>
+        </div>
 
-            <div>
-                <label for="name">Name: </label>
-                <input id="name" type="text" name="name" value={{ name }}>
-            </div>
+        <div>
+            <form method="post">
+                {% csrf_token %}
 
-            <div>
-                <label for="email">Email: </label>
-                <input id="email" type="text" name="email" value={{ email }}>
-            </div>
+                <div>
+                    <input id="username" placeholder=" Username"
+                           type="text" name="username" value={{ username }}>
+                </div>
 
-            <div>
-                <label for="password">Password: </label>
-                <input id="password" type="password" name="password" value={{ password }}>
-            </div>
-                <input type="submit" value="Sign Up">
-        </form>
+                <div>
+                    <input id="name" type="text" placeholder=" Full Name"
+                           name="name" value={{ name }}>
+                </div>
 
+                <div>
+                    <input id="email" type="text" placeholder=" Email"
+                           name="email" value={{ email }}>
+                </div>
 
-    </div><br><br>
+                <div>
+                    <input id="password" type="password" placeholder=" Password"
+                           name="password" value={{ password }}>
+                </div>
+                    <input type="submit" value="Sign Up">
+                <div>
+                    <label>By signing up, you agree to our<br><b>Terms </b>and <b>Privacy Policy</b></label>
+                </div>
+            </form>
 
-    <div><h3>Already a user?</h3><a href="login/">Login</a> </div>
-</body>
+        </div><br>
+
+        <div><h3>Already a user? <a href="login/">Log in</a></h3>
+        </div>
+        </div></div>
+    </body>
+
 </html>
