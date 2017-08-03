@@ -27,3 +27,37 @@ class SessionToken(models.Model):
 
     def create_token(self):
         self.session_token = uuid.uuid4()
+
+
+
+class Post(models.Model):
+	user = models.ForeignKey(User)
+	image = models.FileField(upload_to='user_images')
+	image_url = models.CharField(max_length=255)
+	caption = models.CharField(max_length=240)
+	created_on = models.DateTimeField(auto_now_add=True)
+	updated_on = models.DateTimeField(auto_now=True)
+	has_liked = False
+
+
+	@property
+	def like_count(self):
+		return len(Like.objects.filter(post=self))
+
+	@property
+	def comments(self):
+		return Comment.objects.filter(post=self).order_by('-created_on')
+
+class Like(models.Model):
+	user = models.ForeignKey(User)
+	post = models.ForeignKey(PostModel)
+	created_on = models.DateTimeField(auto_now_add=True)
+	updated_on = models.DateTimeField(auto_now=True)
+
+
+class Comment(models.Model):
+	user = models.ForeignKey(User)
+	post = models.ForeignKey(PostModel)
+	comment_text = models.CharField(max_length=555)
+	created_on = models.DateTimeField(auto_now_add=True)
+updated_on = models.DateTimeField(auto_now=True)
