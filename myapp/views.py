@@ -179,14 +179,14 @@ def upvoting_view(request):
 
 
 def logout_view(request):
-    user=check_validation(request)
+    user = check_validation(request)
     if user is not None:
-        latest_sessn = SessionToken.objects.filter(user=user).last()
-        if latest_sessn:
-            latest_sessn.delete()
-            return redirect("/login/")
-        else:
-            return redirect('/feeds/')
+        latest_session = SessionToken.objects.filter(user=user).last()
+        if latest_session:
+            latest_session.delete()
+
+    return redirect("/login/")
+
 
 # For validating the session
 def check_validation(request):

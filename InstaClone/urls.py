@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from myapp.views import signup_view, feed_view, login_view, post_view
+from myapp.views import signup_view, feed_view, login_view, post_view, like_view, comment_view, logout_view, upvoting_view, search_view
 urlpatterns = [
     url('post/', post_view),
     url('feed/', feed_view),

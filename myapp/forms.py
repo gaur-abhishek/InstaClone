@@ -1,5 +1,5 @@
 from django import forms
-from models import User, Post
+from models import User, Post, Like, Comment
 
 
 class SignUpForm(forms.ModelForm):

@@ -2,26 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
-</head>
-<body><center>
-    <body bgcolor="blue"></body>
-        <form method="post" action="/post/">
-       {% csrf_token %}
-       {{ form }}<br><br><br><br>
-       <input type="submit" class="btn btn-default" size="10" value="create a post">
+    <title>Feed</title>
 
+    <style>
+        body {
+        font-family: helvetica;
+        background-size: cover;
+        margin: auto;
+        max-width: 600px;
+        text-align: center;
+        }
+        input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #9999FF;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #9966FF;
+}
+    </style>
+</head>
+<body>
+
+
+    <form method="post" action="/post/">
+        {% csrf_token %}
+        <input type="submit" class="btn-default btn" value="Create Post">
+    </form>
+
+
+    <form method="post" action="/login/">
+          {%csrf_token%}
+      <input type="submit" class="btn-default btn" value="Logout">
+    </form>
 
     {% for post in posts %}
+
+
         <h3> Posted by: {{ post.user.username }} </h3>
         <p>[{{ post.created_on }}]</p>
-        <img style="display:inline-block; width:360px; height:320px;"
-          img src="{{ post.image_url }}" /><br>
-        <span  style="display:inline-block;">{{ post.caption }}</span><br/><br/>
+
+
+    <img style="display:inline-block; width:350px; height:300px;"
+             src="{{ post.image_url }}" /><br>
+
+    <span  style="display:inline-block;">{{ post.caption }}</span><br/><br/>
+
         <div style="display:inline-block">
             {{ post.like_count }} likes this
         </div>
-        <div sxtyle="display:inline-block">
+
+        <div style="display:inline-block">
+
             <form method="POST" action="/like/">
               {% csrf_token %}
               <input type="hidden" name="post" value="{{ post.id }}" />
@@ -32,6 +78,8 @@
                 {% endif %}
             </form>
         </div>
+
+
 
         <div>
             <form method="POST" action="/comment/">
@@ -46,10 +94,12 @@
         <div>
             {% for comment in post.comments %}
                 <p><b>{{ comment.user.username }} [{{ comment.created_on }}]:</b> {{ comment.comment_text }}</p>
-            {% endfor %}
+
+
+
+             {% endfor %}
         </div>
-            {% endfor %}
-             <input type="submit" class="btn btn-default" size="10" value="logout"><br><br>
-             <input type="submit" class="btn btn-default" size="10" value="products">
-            {{form}} </form> </center> </body>
+
+    {% endfor %}
+</body>
 </html>
